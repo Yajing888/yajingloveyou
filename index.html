@@ -24,6 +24,8 @@
       border-radius: 20px;
       backdrop-filter: blur(10px);
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 2;
     }
 
     img {
@@ -51,6 +53,7 @@
       margin-top: 15px;
       font-size: 22px;
       color: #d81b60;
+      min-height: 30px;
     }
 
     .heart {
@@ -58,6 +61,7 @@
       bottom: -10px;
       font-size: 20px;
       animation: rise 5s linear infinite;
+      pointer-events: none;
     }
 
     @keyframes rise {
@@ -69,12 +73,9 @@
 </head>
 
 <body>
-
-  <!-- 🎵 背景音乐 -->
   <audio id="bgm" src="love.mp3" loop></audio>
 
   <div class="card">
-    <!-- 📸 照片 -->
     <img src="photo.jpg" alt="我们的照片" />
 
     <h1>爱你💋</h1>
@@ -91,21 +92,26 @@
       "虽然你有点呆有点憨 💞",
       "但是很可爱 每天都想你 💘"
     ];
-let index = 0;
 
-function startLove() {
-  const messageBox = document.getElementById("message");
+    let index = 0;
+    let musicStarted = false;
 
-  // 每次点击显示下一句
-  messageBox.innerText = messages[index];
+    function startLove() {
+      const messageBox = document.getElementById("message");
+      const bgm = document.getElementById("bgm");
 
-  index++;
+      if (!musicStarted) {
+        bgm.play().catch(err => console.log("播放失败:", err));
+        musicStarted = true;
+      }
 
-  // 到最后一条后重新开始（循环）
-  if (index >= messages.length) {
-    index = 0;
-  }
-}
+      messageBox.innerText = messages[index];
+
+      index++;
+      if (index >= messages.length) {
+        index = 0;
+      }
+    }
 
     function createHeart() {
       const heart = document.createElement("div");
@@ -119,7 +125,5 @@ function startLove() {
 
     setInterval(createHeart, 300);
   </script>
-
 </body>
 </html>
-<!-- update -->
