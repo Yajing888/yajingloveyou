@@ -4,153 +4,115 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>爱你💗</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
 
+  <style>
     body {
+      margin: 0;
       height: 100vh;
-      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: "Arial", sans-serif;
-      background: linear-gradient(135deg, #ffd6e7, #ffeef5, #ffd1dc);
-      position: relative;
+      background: linear-gradient(135deg, #ffd6e7, #ffeef5);
+      font-family: Arial;
+      overflow: hidden;
     }
 
-    .container {
+    .card {
       text-align: center;
-      z-index: 2;
-      padding: 40px;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.35);
+      background: rgba(255,255,255,0.4);
+      padding: 30px;
+      border-radius: 20px;
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-      animation: floatCard 3s ease-in-out infinite;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    img {
+      width: 220px;
+      border-radius: 15px;
+      margin-bottom: 15px;
     }
 
     h1 {
-      font-size: 64px;
       color: #ff2e63;
-      margin-bottom: 16px;
-      animation: pulse 1.8s infinite;
-    }
-
-    p {
-      font-size: 24px;
-      color: #444;
-      margin-bottom: 24px;
+      font-size: 40px;
     }
 
     button {
-      padding: 14px 28px;
-      font-size: 20px;
+      margin-top: 15px;
+      padding: 10px 20px;
       border: none;
       border-radius: 999px;
       background: #ff4f81;
       color: white;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 6px 18px rgba(255, 79, 129, 0.35);
-    }
-
-    button:hover {
-      transform: scale(1.08);
-      box-shadow: 0 10px 24px rgba(255, 79, 129, 0.45);
     }
 
     #message {
-      margin-top: 22px;
-      font-size: 28px;
+      margin-top: 15px;
+      font-size: 22px;
       color: #d81b60;
-      min-height: 40px;
-      font-weight: bold;
     }
 
     .heart {
       position: absolute;
-      bottom: -20px;
-      font-size: 24px;
-      animation: rise linear forwards;
-      opacity: 0.85;
-      user-select: none;
-      pointer-events: none;
+      bottom: -10px;
+      font-size: 20px;
+      animation: rise 5s linear infinite;
     }
 
     @keyframes rise {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateY(-110vh) scale(1.8);
-        opacity: 0;
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.08);
-      }
-    }
-
-    @keyframes floatCard {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-8px);
-      }
+      0% { transform: translateY(0); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
+
+  <!-- 🎵 背景音乐 -->
+  <audio id="bgm" src="love.mp3" loop></audio>
+
+  <div class="card">
+    <!-- 📸 照片 -->
+    <img src="photo.jpg" alt="我们的照片" />
+
     <h1>爱你💋</h1>
-    <p>点一下按钮，看看我想对你说什么</p>
-    <button onclick="showLove()">点我一下</button>
+
+    <button onclick="startLove()">点我一下</button>
+
     <div id="message"></div>
   </div>
 
   <script>
     const messages = [
-      "比昨天更爱你一点 💗",
-      "今天也还是超级喜欢你 ✨",
-      "你出现的时候，世界都变可爱了 🌸",
-      "我的心动永远偏向你 💞",
-      "爱你这件事我每天都在认真做 💌"
+      "今天也比昨天更爱你 💗",
+      "你出现的时候世界都变甜了 🍓",
+      "虽然你有点呆有点憨 💞",
+      "但是很可爱 每天都想你 💘"
     ];
 
-    function showLove() {
-      const randomIndex = Math.floor(Math.random() * messages.length);
-      document.getElementById("message").textContent = messages[randomIndex];
+    function startLove() {
+      // 播放音乐（必须点击触发）
+      document.getElementById("bgm").play();
+
+      // 显示情话
+      const i = Math.floor(Math.random() * messages.length);
+      document.getElementById("message").textContent = messages[i];
     }
 
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
-      heart.innerHTML = ["💗", "💖", "💘", "💕", "💞"][Math.floor(Math.random() * 5)];
+      heart.innerHTML = "💗";
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 20 + "px";
-      heart.style.animationDuration = Math.random() * 3 + 4 + "s";
       document.body.appendChild(heart);
 
-      setTimeout(() => {
-        heart.remove();
-      }, 7000);
+      setTimeout(() => heart.remove(), 5000);
     }
 
     setInterval(createHeart, 300);
   </script>
+
 </body>
 </html>
