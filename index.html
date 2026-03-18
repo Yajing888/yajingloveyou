@@ -91,15 +91,21 @@
       "虽然你有点呆有点憨 💞",
       "但是很可爱 每天都想你 💘"
     ];
+let index = 0;
 
-    function startLove() {
-      // 播放音乐（必须点击触发）
-      document.getElementById("bgm").play();
+function startLove() {
+  const messageBox = document.getElementById("message");
 
-      // 显示情话
-      const i = Math.floor(Math.random() * messages.length);
-      document.getElementById("message").textContent = messages[i];
-    }
+  // 每次点击显示下一句
+  messageBox.innerText = messages[index];
+
+  index++;
+
+  // 到最后一条后重新开始（循环）
+  if (index >= messages.length) {
+    index = 0;
+  }
+}
 
     function createHeart() {
       const heart = document.createElement("div");
