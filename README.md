@@ -1,18 +1,1 @@
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-  <meta charset="UTF-8">
-  <title>我的第一个网页</title>
-  <style>
-    body {
-      text-align: center;
-      margin-top: 100px;
-      font-size: 40px;
-      background-color: #ffe6f0;
-    }
-  </style>
-</head>
-<body>
-  <h1>爱你💋</h1>
-</body>
-</html>
+My first website
